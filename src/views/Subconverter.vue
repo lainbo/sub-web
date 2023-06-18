@@ -366,7 +366,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: "http://108.166.217.147:25500/sub?",
+        customBackend: "https://sub.lainbo.com/sub?",
         remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini",
         excludeRemarks: "",
         includeRemarks: "",

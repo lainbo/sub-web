@@ -330,6 +330,11 @@ export default {
             label: "customized",
             options: [
               {
+                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗",
+                value:
+                  "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
+              },
+              {
                 label: "Ytoo",
                 value:
                   "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
@@ -367,7 +372,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini",
+        remoteConfig: "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
@@ -375,9 +380,9 @@ export default {
         nodeList: false,
         extraset: false,
         sort: false,
-        udp: false,
+        udp: true,
         tfo: false,
-        scv: true,
+        scv: false,
         fdn: false,
         appendType: false,
         insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
@@ -419,7 +424,7 @@ export default {
   },
   mounted() {
     this.form.clientType = "clash";
-    this.notify();
+    // this.notify();
     this.getBackendVersion();
   },
   methods: {

@@ -6,7 +6,7 @@
           <div slot="header">
             Lainbo Subscription Converter 
 
-            <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
+            <!-- <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div> -->
           </div>
           <el-container>
             <el-form :model="form" label-width="95px"  style="width: 100%">
@@ -366,7 +366,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: "https://sub.lainbo.com/sub?",
+        customBackend: "https://suc.lainbo.com/sub?",
         remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini",
         excludeRemarks: "",
         includeRemarks: "",

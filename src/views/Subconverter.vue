@@ -6,7 +6,6 @@
           <div slot="header">
             Lainbo Subscription Converter 
 
-            <!-- <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div> -->
           </div>
           <el-container>
             <el-form :model="form" label-width="95px"  style="width: 100%">
@@ -31,14 +30,20 @@
 
               <div v-if="advanced === '2'">
                 <el-form-item label="后端地址:">
-                  <el-autocomplete
+                  <el-select
                     style="width: 100%"
                     v-model="form.customBackend"
-                    :fetch-suggestions="backendSearch"
-                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
-                  >
-                    <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
-                  </el-autocomplete>
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?">
+                    <el-option
+                      v-for="item in backendUrlOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
                 </el-form-item>
                 <el-form-item label="远程配置:">
                   <el-select
@@ -63,14 +68,14 @@
                     <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
                   </el-select>
                 </el-form-item>
+                <el-form-item label="订阅文件名:">
+                  <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
+                </el-form-item>
                 <el-form-item label="包含节点:">
                   <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
                 </el-form-item>
                 <el-form-item label="排除节点:">
                   <el-input v-model="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
-                </el-form-item>
-                <el-form-item label="订阅文件名:">
-                  <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
                 </el-form-item>
                 <el-form-item label-width="0px">
                   <el-row type="flex">
@@ -263,7 +268,6 @@
 <script>
 const project = process.env.VUE_APP_PROJECT
 const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
-const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?'
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
@@ -272,7 +276,6 @@ const tgBotLink = process.env.VUE_APP_BOT_LINK
 export default {
   data() {
     return {
-      backendVersion: "",
       advanced: "2",
 
       // 是否为 PC 端
@@ -297,6 +300,31 @@ export default {
         },
         backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
         remoteConfig: [
+        {
+            label: "customized",
+            options: [
+              {
+                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗",
+                value:
+                  "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
+              },
+              {
+                label: "Ytoo",
+                value:
+                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
+              },
+              {
+                label: "FlowerCloud",
+                value:
+                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/flowercloud.ini"
+              },
+              {
+                label: "Nexitally",
+                value:
+                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/nexitally.ini"
+              },
+            ]
+          },
           {
             label: "ACL4SSR",
             options: [
@@ -324,31 +352,6 @@ export default {
                 value:
                   "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/urltest.ini"
               }
-            ]
-          },
-          {
-            label: "customized",
-            options: [
-              {
-                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗",
-                value:
-                  "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
-              },
-              {
-                label: "Ytoo",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
-              },
-              {
-                label: "FlowerCloud",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/flowercloud.ini"
-              },
-              {
-                label: "Nexitally",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/nexitally.ini"
-              },
             ]
           },
           {
@@ -398,6 +401,19 @@ export default {
           }
         }
       },
+      backendUrlOptions: [
+        {
+          label: 'Lainbo的后端',
+          value:'https://suc.lainbo.com/sub?'
+        }
+      ],
+      regexpList: {
+        Nexitally: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire|premium)',
+        Kuromis: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
+        FlowerCloud: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
+        Fengchao: '(?i)(网址|traffic|github)',
+        PaopaoDog:'(流量|套餐)',
+      },
 
       loading: false,
       customSubUrl: "",
@@ -425,7 +441,6 @@ export default {
   mounted() {
     this.form.clientType = "clash";
     // this.notify();
-    this.getBackendVersion();
   },
   methods: {
     onCopy() {
@@ -433,9 +448,6 @@ export default {
     },
     goToProject() {
       window.open(project);
-    },
-    gotoGayhub() {
-      window.open(gayhubRelease);
     },
     gotoRemoteConfig() {
       window.open(remoteConfigSample);
@@ -711,32 +723,12 @@ export default {
       }
       this.dialogLoadConfigVisible = false;
     },
-    backendSearch(queryString, cb) {
-      let backends = this.options.backendOptions;
-
-      let results = queryString
-        ? backends.filter(this.createFilter(queryString))
-        : backends;
-
-      // 调用 callback 返回建议列表的数据
-      cb(results);
-    },
     createFilter(queryString) {
       return candidate => {
         return (
           candidate.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
       };
-    },
-    getBackendVersion() {
-      this.$axios
-        .get(
-          defaultBackend.substring(0, defaultBackend.length - 5) + "/version"
-        )
-        .then(res => {
-          this.backendVersion = res.data.replace(/backend\n$/gm, "");
-          this.backendVersion = this.backendVersion.replace("subconverter", "");
-        });
     },
     saveSubUrl() {
       if (this.form.sourceSubUrl !== '') {
@@ -772,5 +764,23 @@ export default {
       localStorage.setItem(itemKey, JSON.stringify(data))
     }
   },
+  watch: {
+    'form.filename'(newVal) {
+        const m = new Map([
+          ['奶昔', this.regexpList.Nexitally],
+          ['nexitally', this.regexpList.Nexitally],
+          ['kuromis', this.regexpList.Kuromis],
+          ['库洛米', this.regexpList.Kuromis],
+          ['花云', this.regexpList.FlowerCloud],
+          ['flowercloud', this.regexpList.FlowerCloud],
+          ['蜂巢', this.regexpList.Fengchao],
+          ['泡泡狗', this.regexpList.PaopaoDog],
+          ['泡泡dog', this.regexpList.PaopaoDog]
+        ])
+        if (m.has(newVal.toLowerCase())) {
+          this.form.excludeRemarks = m.get(newVal.toLowerCase())
+        }
+      }
+  }
 };
 </script>

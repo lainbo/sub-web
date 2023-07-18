@@ -15,7 +15,7 @@
               </el-form-item>
               <el-form-item label="订阅链接:">
                 <el-input
-                  v-model="form.sourceSubUrl"
+                  v-model.trim="form.sourceSubUrl"
                   type="textarea"
                   rows="3"
                   placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔"
@@ -69,13 +69,13 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="订阅文件名:">
-                  <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
+                  <el-input v-model.trim="form.filename" placeholder="返回的订阅文件名" />
                 </el-form-item>
                 <el-form-item label="包含节点:">
-                  <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
+                  <el-input v-model.trim="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
                 </el-form-item>
                 <el-form-item label="排除节点:">
-                  <el-input v-model="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
+                  <el-input v-model.trim="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
                 </el-form-item>
                 <el-form-item label-width="0px">
                   <el-row type="flex">
@@ -304,7 +304,12 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗",
+                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗 (CDN加速版本)",
+                value:
+                  "https://cdn.jsdelivr.net/gh/lainbo/gists-hub@master/src/Clash/RemoteConfig/Lainbo.ini"
+              },
+              {
+                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗 (GitHub raw 文件原版)",
                 value:
                   "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
               },
@@ -375,7 +380,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini",
+        remoteConfig: "https://cdn.jsdelivr.net/gh/lainbo/gists-hub@master/src/Clash/RemoteConfig/Lainbo.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
@@ -515,7 +520,7 @@ export default {
         }
         if (this.form.filename !== "") {
           this.customSubUrl +=
-            "&filename=" + encodeURIComponent(this.form.filename);
+            "&filename=" + this.form.filename;
         }
         if (this.form.appendType) {
           this.customSubUrl +=

@@ -304,14 +304,14 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗 (CDN加速版本)",
-                value:
-                  "https://cdn.jsdelivr.net/gh/lainbo/gists-hub@master/src/Clash/RemoteConfig/Lainbo.ini"
-              },
-              {
                 label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗 (GitHub raw 文件原版)",
                 value:
                   "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
+              },
+              {
+                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗 (CDN加速版本，更新会慢一天)",
+                value:
+                  "https://cdn.jsdelivr.net/gh/lainbo/gists-hub@master/src/Clash/RemoteConfig/Lainbo.ini"
               },
               {
                 label: "Ytoo",
@@ -380,7 +380,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://cdn.jsdelivr.net/gh/lainbo/gists-hub@master/src/Clash/RemoteConfig/Lainbo.ini",
+        remoteConfig: "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

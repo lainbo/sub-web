@@ -415,7 +415,7 @@ export default {
       regexpList: {
         Nexitally: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire|premium)',
         Kuromis: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
-        FlowerCloud: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire|实验性)',
+        FlowerCloud: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
         Fengchao: '(?i)(网址|traffic|github)',
         PaopaoDog:'(流量|套餐)',
       },

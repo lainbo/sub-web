@@ -306,7 +306,7 @@ export default {
               {
                 label: "Lainbo's config(短链)",
                 value:
-                  "https://v.gd/lyLsLj"
+                  "https://v.gd/config"
               },
               {
                 label: "Lainbo's config(短链备用)",

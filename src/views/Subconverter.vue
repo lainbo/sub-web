@@ -311,6 +311,11 @@ export default {
               {
                 label: "Lainbo's config(短链)",
                 value:
+                  "https://t.ly/aczsc"
+              },
+              {
+                label: "Lainbo's config(短链备用)",
+                value:
                   "https://reduced.to/s3ioq"
               },
               {
@@ -380,7 +385,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini",
+        remoteConfig: "https://t.ly/aczsc",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

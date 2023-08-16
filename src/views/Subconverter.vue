@@ -385,7 +385,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://v.gd/lyLsLj",
+        remoteConfig: "https://v.gd/config",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

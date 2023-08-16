@@ -309,6 +309,11 @@ export default {
                   "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
               },
               {
+                label: "Lainbo's config(短链)",
+                value:
+                  "https://reduced.to/s3ioq"
+              },
+              {
                 label: "Ytoo",
                 value:
                   "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"

@@ -311,11 +311,6 @@ export default {
               {
                 label: "Lainbo's config(短链)",
                 value:
-                  "https://t.ly/aczsc"
-              },
-              {
-                label: "Lainbo's config(短链备用)",
-                value:
                   "https://reduced.to/s3ioq"
               },
               {

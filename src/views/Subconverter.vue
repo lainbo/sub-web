@@ -304,7 +304,7 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config, 包含GPT自动美国节点，真实Ping，过Adobe正版弹窗",
+                label: "Lainbo's config",
                 value:
                   "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
               },

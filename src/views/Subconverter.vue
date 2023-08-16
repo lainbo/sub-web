@@ -380,7 +380,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://t.ly/aczsc",
+        remoteConfig: "https://reduced.to/s3ioq",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

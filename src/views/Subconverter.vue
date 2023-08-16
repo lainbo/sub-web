@@ -304,14 +304,19 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config",
-                value:
-                  "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
-              },
-              {
                 label: "Lainbo's config(短链)",
                 value:
+                  "https://v.gd/lyLsLj"
+              },
+              {
+                label: "Lainbo's config(短链备用)",
+                value:
                   "https://reduced.to/s3ioq"
+              },
+              {
+                label: "Lainbo's config(原链接，比较长但一定能连通)",
+                value:
+                  "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
               },
               {
                 label: "Ytoo",
@@ -380,7 +385,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://reduced.to/s3ioq",
+        remoteConfig: "https://v.gd/lyLsLj",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

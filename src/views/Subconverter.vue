@@ -306,12 +306,12 @@ export default {
               {
                 label: "Lainbo's config(短链)",
                 value:
-                  "https://v.gd/config"
+                  "https://u.lainbo.com/config"
               },
               {
                 label: "Lainbo's config(短链备用)",
                 value:
-                  "https://reduced.to/s3ioq"
+                  "https://v.gd/config"
               },
               {
                 label: "Lainbo's config(原链接，比较长但一定能连通)",
@@ -385,7 +385,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: "https://suc.lainbo.com/sub?",
-        remoteConfig: "https://v.gd/config",
+        remoteConfig: "https://u.lainbo.com/config",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

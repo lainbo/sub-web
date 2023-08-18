@@ -114,8 +114,8 @@
               <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
                 <el-button style="width: 120px" type="danger" @click="makeUrl"
                   :disabled="form.sourceSubUrl.length === 0">生成订阅链接</el-button>
-                <el-button style="width: 120px" type="danger" @click="makeShortUrl" :loading="loading"
-                  :disabled="customSubUrl.length === 0">生成短链接</el-button>
+                <el-button style="width: 120px" type="danger" 
+                  :disabled="true">生成短链接</el-button>
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button> -->
               </el-form-item>
 
@@ -475,32 +475,6 @@ export default {
 
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");
-    },
-    async makeShortUrl() {
-      if (this.customSubUrl === "") {
-        this.$message.warning("请先生成订阅链接，再获取对应短链接");
-        return false;
-      }
-
-      this.loading = true;
-      const obj = {
-        cmd: "add",
-        url: this.customSubUrl,
-        keyPhrase: "",
-        password: process.env.PAGE_PASSWORD,
-      }
-      const data = this.$axios.post(`https://u.lainbo.com/${process.env.PAGE_PASSWORD}`, obj)
-      this.loading = false;
-      const res = data.data
-      if (data.status !== 200) {
-        this.$message.error('请求失败')
-      } else if (res.status !== 200) {
-        this.$message.error(res.error)
-      } else {
-        this.curtomShortSubUrl = `${process.env.SHORTLINK_BACKEND}/${res.key}`
-        this.$copyText(res.data.ShortUrl);
-        this.$message.success("短链接已复制到剪贴板");
-      }
     },
     notify() {
       const h = this.$createElement;

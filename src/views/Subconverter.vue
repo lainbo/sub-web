@@ -4,23 +4,18 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Lainbo Subscription Converter 
+            Lainbo Subscription Converter
 
           </div>
           <el-container>
-            <el-form :model="form" label-width="95px"  style="width: 100%">
+            <el-form :model="form" label-width="95px" style="width: 100%">
               <el-form-item label="模式设置:">
                 <el-radio v-model="advanced" label="1">基础模式</el-radio>
                 <el-radio v-model="advanced" label="2">进阶模式</el-radio>
               </el-form-item>
               <el-form-item label="订阅链接:">
-                <el-input
-                  v-model.trim="form.sourceSubUrl"
-                  type="textarea"
-                  rows="3"
-                  placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔"
-                  @blur="saveSubUrl"
-                />
+                <el-input v-model.trim="form.sourceSubUrl" type="textarea" rows="3"
+                  placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
               </el-form-item>
               <el-form-item label="客户端:">
                 <el-select v-model="form.clientType" style="width: 100%">
@@ -30,40 +25,18 @@
 
               <div v-if="advanced === '2'">
                 <el-form-item label="后端地址:">
-                  <el-select
-                    style="width: 100%"
-                    v-model="form.customBackend"
-                    filterable
-                    allow-create
-                    default-first-option
+                  <el-select style="width: 100%" v-model="form.customBackend" filterable allow-create default-first-option
                     placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?">
-                    <el-option
-                      v-for="item in backendUrlOptions"
-                      :key="item.value"
-                      :label="item.label"
+                    <el-option v-for="item in backendUrlOptions" :key="item.value" :label="item.label"
                       :value="item.value">
                     </el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="远程配置:">
-                  <el-select
-                    v-model="form.remoteConfig"
-                    allow-create
-                    filterable
-                    placeholder="请选择"
-                    style="width: 100%"
-                  >
-                    <el-option-group
-                      v-for="group in options.remoteConfig"
-                      :key="group.label"
-                      :label="group.label"
-                    >
-                      <el-option
-                        v-for="item in group.options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      ></el-option>
+                  <el-select v-model="form.remoteConfig" allow-create filterable placeholder="请选择" style="width: 100%">
+                    <el-option-group v-for="group in options.remoteConfig" :key="group.label" :label="group.label">
+                      <el-option v-for="item in group.options" :key="item.value" :label="item.label"
+                        :value="item.value"></el-option>
                     </el-option-group>
                     <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
                   </el-select>
@@ -127,68 +100,34 @@
 
               <el-form-item label="定制订阅:">
                 <el-input class="copy-content" disabled v-model="customSubUrl">
-                  <el-button
-                    slot="append"
-                    v-clipboard:copy="customSubUrl"
-                    v-clipboard:success="onCopy"
-                    ref="copy-btn"
-                    icon="el-icon-document-copy"
-                  >复制</el-button>
+                  <el-button slot="append" v-clipboard:copy="customSubUrl" v-clipboard:success="onCopy" ref="copy-btn"
+                    icon="el-icon-document-copy">复制</el-button>
                 </el-input>
               </el-form-item>
               <el-form-item label="订阅短链:">
                 <el-input class="copy-content" disabled v-model="curtomShortSubUrl">
-                  <el-button
-                    slot="append"
-                    v-clipboard:copy="curtomShortSubUrl"
-                    v-clipboard:success="onCopy"
-                    ref="copy-btn"
-                    icon="el-icon-document-copy"
-                  >复制</el-button>
+                  <el-button slot="append" v-clipboard:copy="curtomShortSubUrl" v-clipboard:success="onCopy"
+                    ref="copy-btn" icon="el-icon-document-copy">复制</el-button>
                 </el-input>
               </el-form-item>
 
               <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
-                <el-button
-                  style="width: 120px"
-                  type="danger"
-                  @click="makeUrl"
-                  :disabled="form.sourceSubUrl.length === 0"
-                >生成订阅链接</el-button>
-                <el-button
-                  style="width: 120px"
-                  type="danger"
-                  @click="makeShortUrl"
-                  :loading="loading"
-                  :disabled="customSubUrl.length === 0"
-                >生成短链接</el-button>
+                <el-button style="width: 120px" type="danger" @click="makeUrl"
+                  :disabled="form.sourceSubUrl.length === 0">生成订阅链接</el-button>
+                <el-button style="width: 120px" type="danger" @click="makeShortUrl" :loading="loading"
+                  :disabled="customSubUrl.length === 0">生成短链接</el-button>
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button> -->
               </el-form-item>
 
               <el-form-item label-width="0px" style="text-align: center">
-                <el-button
-                  style="width: 120px"
-                  type="primary"
-                  @click="dialogUploadConfigVisible = true"
-                  icon="el-icon-upload"
-                  :loading="loading"
-                >上传配置</el-button>
-                <el-button
-                  style="width: 120px"
-                  type="primary"
-                  @click="clashInstall"
-                  icon="el-icon-connection"
-                  :disabled="customSubUrl.length === 0"
-                >一键导入Clash</el-button>
+                <el-button style="width: 120px" type="primary" @click="dialogUploadConfigVisible = true"
+                  icon="el-icon-upload" :loading="loading">上传配置</el-button>
+                <el-button style="width: 120px" type="primary" @click="clashInstall" icon="el-icon-connection"
+                  :disabled="customSubUrl.length === 0">一键导入Clash</el-button>
               </el-form-item>
               <el-form-item label-width="0px" style="text-align: center">
-                <el-button
-                    style="width: 250px"
-                    type="primary"
-                    @click="dialogLoadConfigVisible = true"
-                    icon="el-icon-copy-document"
-                    :loading="loading"
-                >从URL解析</el-button>
+                <el-button style="width: 250px" type="primary" @click="dialogLoadConfigVisible = true"
+                  icon="el-icon-copy-document" :loading="loading">从URL解析</el-button>
               </el-form-item>
             </el-form>
           </el-container>
@@ -196,13 +135,8 @@
       </el-col>
     </el-row>
 
-    <el-dialog
-      :visible.sync="dialogUploadConfigVisible"
-      :show-close="false"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-      width="700px"
-    >
+    <el-dialog :visible.sync="dialogUploadConfigVisible" :show-close="false" :close-on-click-modal="false"
+      :close-on-press-escape="false" width="700px">
       <div slot="title">
         Remote config upload
         <el-popover trigger="hover" placement="right" style="margin-left: 10px">
@@ -212,53 +146,30 @@
       </div>
       <el-form label-position="left">
         <el-form-item prop="uploadConfig">
-          <el-input
-            v-model="uploadConfig"
-            type="textarea"
-            :autosize="{ minRows: 15, maxRows: 15}"
-            maxlength="5000"
-            show-word-limit
-          ></el-input>
+          <el-input v-model="uploadConfig" type="textarea" :autosize="{ minRows: 15, maxRows: 15 }" maxlength="5000"
+            show-word-limit></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="uploadConfig = ''; dialogUploadConfigVisible = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click="confirmUploadConfig"
-          :disabled="uploadConfig.length === 0"
-        >确 定</el-button>
+        <el-button type="primary" @click="confirmUploadConfig" :disabled="uploadConfig.length === 0">确 定</el-button>
       </div>
     </el-dialog>
 
-    <el-dialog
-        :visible.sync="dialogLoadConfigVisible"
-        :show-close="false"
-        :close-on-click-modal="false"
-        :close-on-press-escape="false"
-        width="700px"
-    >
+    <el-dialog :visible.sync="dialogLoadConfigVisible" :show-close="false" :close-on-click-modal="false"
+      :close-on-press-escape="false" width="700px">
       <div slot="title">
         可以从老的订阅信息中解析信息,填入页面中去
       </div>
       <el-form label-position="left">
         <el-form-item prop="uploadConfig">
-          <el-input
-              v-model="loadConfig"
-              type="textarea"
-              :autosize="{ minRows: 15, maxRows: 15}"
-              maxlength="5000"
-              show-word-limit
-          ></el-input>
+          <el-input v-model="loadConfig" type="textarea" :autosize="{ minRows: 15, maxRows: 15 }" maxlength="5000"
+            show-word-limit></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="loadConfig = ''; dialogLoadConfigVisible = false">取 消</el-button>
-        <el-button
-            type="primary"
-            @click="confirmLoadConfig"
-            :disabled="loadConfig.length === 0"
-        >确 定</el-button>
+        <el-button type="primary" @click="confirmLoadConfig" :disabled="loadConfig.length === 0">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -269,7 +180,6 @@
 const project = process.env.VUE_APP_PROJECT
 const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?'
-const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 
@@ -300,7 +210,7 @@ export default {
         },
         backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
         remoteConfig: [
-        {
+          {
             label: "customized",
             options: [
               {
@@ -345,7 +255,7 @@ export default {
               },
               {
                 label: "ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)",
-                value:"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
+                value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
               }
             ]
           },
@@ -414,7 +324,7 @@ export default {
       backendUrlOptions: [
         {
           label: 'Lainbo的后端',
-          value:'https://suc.lainbo.com/sub?'
+          value: 'https://suc.lainbo.com/sub?'
         }
       ],
       regexpList: {
@@ -422,7 +332,7 @@ export default {
         Kuromis: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
         FlowerCloud: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
         Fengchao: '(?i)(网址|traffic|github)',
-        PaopaoDog:'(流量|套餐)',
+        PaopaoDog: '(流量|套餐)',
       },
 
       loading: false,
@@ -471,11 +381,11 @@ export default {
       const url = "clash://install-config?url=";
       window.open(
         url +
-          encodeURIComponent(
-            this.curtomShortSubUrl !== ""
-              ? this.curtomShortSubUrl
-              : this.customSubUrl
-          )
+        encodeURIComponent(
+          this.curtomShortSubUrl !== ""
+            ? this.curtomShortSubUrl
+            : this.customSubUrl
+        )
       );
     },
     surgeInstall() {
@@ -566,38 +476,31 @@ export default {
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");
     },
-    makeShortUrl() {
+    async makeShortUrl() {
       if (this.customSubUrl === "") {
         this.$message.warning("请先生成订阅链接，再获取对应短链接");
         return false;
       }
 
       this.loading = true;
-
-      let data = new FormData();
-      data.append("longUrl", btoa(this.customSubUrl));
-
-      this.$axios
-        .post(shortUrlBackend, data, {
-          header: {
-            "Content-Type": "application/form-data; charset=utf-8"
-          }
-        })
-        .then(res => {
-          if (res.data.Code === 1 && res.data.ShortUrl !== "") {
-            this.curtomShortSubUrl = res.data.ShortUrl;
-            this.$copyText(res.data.ShortUrl);
-            this.$message.success("短链接已复制到剪贴板");
-          } else {
-            this.$message.error("短链接获取失败：" + res.data.Message);
-          }
-        })
-        .catch(() => {
-          this.$message.error("短链接获取失败");
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      const obj = {
+        cmd: "add",
+        url: this.customSubUrl,
+        keyPhrase: "",
+        password: process.env.PAGE_PASSWORD,
+      }
+      const data = this.$axios.post(`https://u.lainbo.com/${process.env.PAGE_PASSWORD}`, obj)
+      this.loading = false;
+      const res = data.data
+      if (data.status !== 200) {
+        this.$message.error('请求失败')
+      } else if (res.status !== 200) {
+        this.$message.error(res.error)
+      } else {
+        this.curtomShortSubUrl = `${process.env.SHORTLINK_BACKEND}/${res.key}`
+        this.$copyText(res.data.ShortUrl);
+        this.$message.success("短链接已复制到剪贴板");
+      }
     },
     notify() {
       const h = this.$createElement;
@@ -652,9 +555,9 @@ export default {
           this.loading = false;
         });
     },
-    confirmLoadConfig(){
+    confirmLoadConfig() {
       // 怎么解析短链接的302和301...
-      if (this.loadConfig.indexOf("target")=== -1){
+      if (this.loadConfig.indexOf("target") === -1) {
         this.$message.error("请输入正确的订阅地址,暂不支持短链接!");
         return;
       }
@@ -667,68 +570,68 @@ export default {
       }
       this.form.customBackend = url.origin + url.pathname + "?"
       let param = new URLSearchParams(url.search);
-      if (param.get("target")){
+      if (param.get("target")) {
         let target = param.get("target");
         if (target === 'surge' && param.get("ver")) {
           // 类型为surge,有ver
-          this.form.clientType = target+"&ver="+param.get("ver");
-        } else if (target === 'surge'){
+          this.form.clientType = target + "&ver=" + param.get("ver");
+        } else if (target === 'surge') {
           //类型为surge,没有ver
-          this.form.clientType = target+"&ver=4"
+          this.form.clientType = target + "&ver=4"
         } else {
           //类型为其他
           this.form.clientType = target;
         }
       }
-      if (param.get("url")){
+      if (param.get("url")) {
         this.form.sourceSubUrl = param.get("url");
       }
-      if (param.get("insert")){
+      if (param.get("insert")) {
         this.form.insert = param.get("insert") === 'true';
       }
-      if (param.get("config")){
+      if (param.get("config")) {
         this.form.remoteConfig = param.get("config");
       }
-      if (param.get("exclude")){
+      if (param.get("exclude")) {
         this.form.excludeRemarks = param.get("exclude");
       }
-      if (param.get("include")){
+      if (param.get("include")) {
         this.form.includeRemarks = param.get("include");
       }
-      if (param.get("filename")){
+      if (param.get("filename")) {
         this.form.filename = param.get("filename");
       }
-      if (param.get("append_type")){
+      if (param.get("append_type")) {
         this.form.appendType = param.get("append_type") === 'true';
       }
-      if (param.get("emoji")){
+      if (param.get("emoji")) {
         this.form.emoji = param.get("emoji") === 'true';
       }
-      if (param.get("list")){
+      if (param.get("list")) {
         this.form.nodeList = param.get("list") === 'true';
       }
-      if (param.get("tfo")){
+      if (param.get("tfo")) {
         this.form.tfo = param.get("tfo") === 'true';
       }
-      if (param.get("scv")){
+      if (param.get("scv")) {
         this.form.scv = param.get("scv") === 'true';
       }
-      if (param.get("fdn")){
+      if (param.get("fdn")) {
         this.form.fdn = param.get("fdn") === 'true';
       }
-      if (param.get("sort")){
+      if (param.get("sort")) {
         this.form.sort = param.get("sort") === 'true';
       }
-      if (param.get("udp")){
+      if (param.get("udp")) {
         this.form.udp = param.get("udp") === 'true';
       }
-      if (param.get("surge.doh")){
+      if (param.get("surge.doh")) {
         this.form.tpl.surge.doh = param.get("surge.doh") === 'true';
       }
-      if (param.get("clash.doh")){
+      if (param.get("clash.doh")) {
         this.form.tpl.clash.doh = param.get("clash.doh") === 'true';
       }
-      if (param.get("new_name")){
+      if (param.get("new_name")) {
         this.form.new_name = param.get("new_name") === 'true';
       }
       this.dialogLoadConfigVisible = false;
@@ -776,21 +679,21 @@ export default {
   },
   watch: {
     'form.filename'(newVal) {
-        const m = new Map([
-          ['奶昔', this.regexpList.Nexitally],
-          ['nexitally', this.regexpList.Nexitally],
-          ['kuromis', this.regexpList.Kuromis],
-          ['库洛米', this.regexpList.Kuromis],
-          ['花云', this.regexpList.FlowerCloud],
-          ['flowercloud', this.regexpList.FlowerCloud],
-          ['蜂巢', this.regexpList.Fengchao],
-          ['泡泡狗', this.regexpList.PaopaoDog],
-          ['泡泡dog', this.regexpList.PaopaoDog]
-        ])
-        if (m.has(newVal.toLowerCase())) {
-          this.form.excludeRemarks = m.get(newVal.toLowerCase())
-        }
+      const m = new Map([
+        ['奶昔', this.regexpList.Nexitally],
+        ['nexitally', this.regexpList.Nexitally],
+        ['kuromis', this.regexpList.Kuromis],
+        ['库洛米', this.regexpList.Kuromis],
+        ['花云', this.regexpList.FlowerCloud],
+        ['flowercloud', this.regexpList.FlowerCloud],
+        ['蜂巢', this.regexpList.Fengchao],
+        ['泡泡狗', this.regexpList.PaopaoDog],
+        ['泡泡dog', this.regexpList.PaopaoDog]
+      ])
+      if (m.has(newVal.toLowerCase())) {
+        this.form.excludeRemarks = m.get(newVal.toLowerCase())
       }
+    }
   }
 };
 </script>

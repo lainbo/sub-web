@@ -325,6 +325,14 @@ export default {
         {
           label: 'Lainbo的后端',
           value: 'https://suc.lainbo.com/sub?'
+        },
+        {
+          label: '墙洞的后端',
+          value: 'https://api.dler.io/sub?'
+        },
+        {
+          label: '奶昔的后端',
+          value: 'https://api.nexconvert.com/sub?'
         }
       ],
       regexpList: {

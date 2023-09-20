@@ -659,23 +659,23 @@ export default {
       localStorage.setItem(itemKey, JSON.stringify(data))
     }
   },
-  watch: {
-    'form.filename'(newVal) {
-      const m = new Map([
-        ['奶昔', this.regexpList.Nexitally],
-        ['nexitally', this.regexpList.Nexitally],
-        ['kuromis', this.regexpList.Kuromis],
-        ['库洛米', this.regexpList.Kuromis],
-        ['花云', this.regexpList.FlowerCloud],
-        ['flowercloud', this.regexpList.FlowerCloud],
-        ['蜂巢', this.regexpList.Fengchao],
-        ['泡泡狗', this.regexpList.PaopaoDog],
-        ['泡泡dog', this.regexpList.PaopaoDog]
-      ])
-      if (m.has(newVal.toLowerCase())) {
-        this.form.excludeRemarks = m.get(newVal.toLowerCase())
-      }
-    }
-  }
+  // watch: {
+  //   'form.filename'(newVal) {
+  //     const m = new Map([
+  //       ['奶昔', this.regexpList.Nexitally],
+  //       ['nexitally', this.regexpList.Nexitally],
+  //       ['kuromis', this.regexpList.Kuromis],
+  //       ['库洛米', this.regexpList.Kuromis],
+  //       ['花云', this.regexpList.FlowerCloud],
+  //       ['flowercloud', this.regexpList.FlowerCloud],
+  //       ['蜂巢', this.regexpList.Fengchao],
+  //       ['泡泡狗', this.regexpList.PaopaoDog],
+  //       ['泡泡dog', this.regexpList.PaopaoDog]
+  //     ])
+  //     if (m.has(newVal.toLowerCase())) {
+  //       this.form.excludeRemarks = m.get(newVal.toLowerCase())
+  //     }
+  //   }
+  // }
 };
 </script>

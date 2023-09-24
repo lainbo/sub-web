@@ -327,22 +327,22 @@ export default {
           value: 'https://suc.lainbo.com/sub?'
         },
         {
-          label: 'sublink',
-          value: 'https://api.sublink.dev/sub?'
-        },
-        {
           label: 'wcc',
           value: 'https://api.wcc.best/sub?'
         },
         {
           label: '奶昔的后端',
           value: 'https://api.nexconvert.com/sub?'
-        }
+        },
+        {
+          label: 'sublink',
+          value: 'https://api.sublink.dev/sub?'
+        },
       ],
       regexpList: {
-        Nexitally: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire|premium)',
-        Kuromis: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
-        FlowerCloud: '(?i)(traffic|((?=.*\\|)(?=.*gb))|expire)',
+        Nexitally: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire|premium)',
+        Kuromis: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire)',
+        FlowerCloud: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire)',
         Fengchao: '(?i)(网址|traffic|github)',
         PaopaoDog: '(流量|套餐)',
       },

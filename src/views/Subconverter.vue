@@ -327,8 +327,12 @@ export default {
           value: 'https://suc.lainbo.com/sub?'
         },
         {
-          label: '墙洞的后端',
-          value: 'https://api.dler.io/sub?'
+          label: 'sublink',
+          value: 'https://api.sublink.dev/sub?'
+        },
+        {
+          label: 'wcc',
+          value: 'https://api.wcc.best/sub?'
         },
         {
           label: '奶昔的后端',

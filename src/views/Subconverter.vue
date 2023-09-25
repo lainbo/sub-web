@@ -461,7 +461,7 @@ export default {
 
         this.customSubUrl +=
           "&emoji=" +
-          this.form.emoji.toString() +
+          this.form.emoji?.toString() +
           "&list=" +
           this.form.nodeList.toString() +
           "&tfo=" +

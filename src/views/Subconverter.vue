@@ -648,7 +648,9 @@ export default {
     'form.sourceSubUrl'(newVal) {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: 'https://api.wcc.best/sub?' },
-        { key: 'ljcmlu.lol', value: 'https://api.nexconvert.com/sub?' }
+        { key: '-YTOO-', value: 'https://api.wcc.best/sub?' },
+        { key: 'ljcmlu.lol', value: 'https://api.nexconvert.com/sub?' },
+        { key: '-NX-', value: 'https://api.nexconvert.com/sub?' },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));

@@ -654,7 +654,7 @@ export default {
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend.value || 'https://suc.lainbo.com/sub?';
+      this.form.customBackend = matchedBackend?.value || 'https://suc.lainbo.com/sub?';
     }
 
     // 'form.filename'(newVal) {

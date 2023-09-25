@@ -644,23 +644,33 @@ export default {
       localStorage.setItem(itemKey, JSON.stringify(data))
     }
   },
-  // watch: {
-  //   'form.filename'(newVal) {
-  //     const m = new Map([
-  //       ['奶昔', this.regexpList.Nexitally],
-  //       ['nexitally', this.regexpList.Nexitally],
-  //       ['kuromis', this.regexpList.Kuromis],
-  //       ['库洛米', this.regexpList.Kuromis],
-  //       ['花云', this.regexpList.FlowerCloud],
-  //       ['flowercloud', this.regexpList.FlowerCloud],
-  //       ['蜂巢', this.regexpList.Fengchao],
-  //       ['泡泡狗', this.regexpList.PaopaoDog],
-  //       ['泡泡dog', this.regexpList.PaopaoDog]
-  //     ])
-  //     if (m.has(newVal.toLowerCase())) {
-  //       this.form.excludeRemarks = m.get(newVal.toLowerCase())
-  //     }
-  //   }
-  // }
+  watch: {
+    'form.sourceSubUrl'(newVal) {
+      const customBackendMap = [
+        { key: 'oxycontin.cc', value: 'https://api.wcc.best/sub?' },
+        { key: 'ljcmlu.lol', value: 'https://api.nexconvert.com/sub?' }
+      ];
+
+      const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
+      this.form.customBackend = matchedBackend.value || 'https://suc.lainbo.com/sub?';
+    }
+
+    // 'form.filename'(newVal) {
+    //   const m = new Map([
+    //     ['奶昔', this.regexpList.Nexitally],
+    //     ['nexitally', this.regexpList.Nexitally],
+    //     ['kuromis', this.regexpList.Kuromis],
+    //     ['库洛米', this.regexpList.Kuromis],
+    //     ['花云', this.regexpList.FlowerCloud],
+    //     ['flowercloud', this.regexpList.FlowerCloud],
+    //     ['蜂巢', this.regexpList.Fengchao],
+    //     ['泡泡狗', this.regexpList.PaopaoDog],
+    //     ['泡泡dog', this.regexpList.PaopaoDog]
+    //   ])
+    //   if (m.has(newVal.toLowerCase())) {
+    //     this.form.excludeRemarks = m.get(newVal.toLowerCase())
+    //   }
+    // }
+  }
 };
 </script>

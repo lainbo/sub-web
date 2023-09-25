@@ -57,7 +57,12 @@
                     </el-col>
                     <el-popover placement="bottom" v-model="form.extraset">
                       <el-row>
-                        <el-checkbox v-model="form.emoji" label="Emoji"></el-checkbox>
+                        <div>Emoji:</div>
+                        <el-radio-group v-model="form.emoji" size="mini" label="Emoji">
+                          <el-radio-button :label="undefined">订阅自带</el-radio-button>
+                          <el-radio-button :label="true">规则内置</el-radio-button>
+                          <el-radio-button :label="false">关闭</el-radio-button>
+                        </el-radio-group>
                       </el-row>
                       <el-row>
                         <el-checkbox v-model="form.scv" label="跳过证书验证"></el-checkbox>
@@ -299,7 +304,7 @@ export default {
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
-        emoji: true,
+        emoji: undefined,
         nodeList: false,
         extraset: false,
         sort: false,

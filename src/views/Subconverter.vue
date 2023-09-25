@@ -438,57 +438,33 @@ export default {
         this.form.insert;
 
       if (this.advanced === "2") {
-        if (this.form.remoteConfig !== "") {
-          this.customSubUrl +=
-            "&config=" + encodeURIComponent(this.form.remoteConfig);
-        }
-        if (this.form.excludeRemarks !== "") {
-          this.customSubUrl +=
-            "&exclude=" + encodeURIComponent(this.form.excludeRemarks);
-        }
-        if (this.form.includeRemarks !== "") {
-          this.customSubUrl +=
-            "&include=" + encodeURIComponent(this.form.includeRemarks);
-        }
-        if (this.form.filename !== "") {
-          this.customSubUrl +=
-            "&filename=" + this.form.filename;
-        }
-        if (this.form.appendType) {
-          this.customSubUrl +=
-            "&append_type=" + this.form.appendType.toString();
-        }
+        const params = {
+          config: this.form.remoteConfig ? encodeURIComponent(this.form.remoteConfig) : null,
+          exclude: this.form.excludeRemarks ? encodeURIComponent(this.form.excludeRemarks) : null,
+          include: this.form.includeRemarks ? encodeURIComponent(this.form.includeRemarks) : null,
+          filename: this.form.filename || null,
+          append_type: this.form.appendType ? this.form.appendType.toString() : null,
+          list: this.form.nodeList,
+          tfo: this.form.tfo,
+          scv: this.form.scv,
+          fdn: this.form.fdn,
+          sort: this.form.sort,
+          emoji: this.form.emoji !== undefined ? this.form.emoji : null,
+          udp: this.needUdp ? this.form.udp?.toString() : null,
+          "surge.doh": this.form.tpl.surge.doh === true ? "true" : null,
+          "clash.doh": this.form.clientType === "clash" && this.form.tpl.clash.doh === true ? "true" : null,
+          new_name: this.form.clientType === "clash" ? this.form.new_name?.toString() : null
+        };
 
-        this.customSubUrl +=
-          "&emoji=" +
-          this.form.emoji?.toString() +
-          "&list=" +
-          this.form.nodeList.toString() +
-          "&tfo=" +
-          this.form.tfo.toString() +
-          "&scv=" +
-          this.form.scv.toString() +
-          "&fdn=" +
-          this.form.fdn.toString() +
-          "&sort=" +
-          this.form.sort.toString();
+        const filteredParams = Object.entries(params)
+          // eslint-disable-next-line no-unused-vars
+          .filter(([_, value]) => value !== null)  // 去除值为null的键值对
+          .map(([key, value]) => `${key}=${value}`)
+          .join('&');
 
-        if (this.needUdp) {
-          this.customSubUrl += "&udp=" + this.form.udp.toString()
-        }
-
-        if (this.form.tpl.surge.doh === true) {
-          this.customSubUrl += "&surge.doh=true";
-        }
-
-        if (this.form.clientType === "clash") {
-          if (this.form.tpl.clash.doh === true) {
-            this.customSubUrl += "&clash.doh=true";
-          }
-
-          this.customSubUrl += "&new_name=" + this.form.new_name.toString();
-        }
+        this.customSubUrl += `&${filteredParams}`;
       }
+
 
       this.$copyText(this.customSubUrl);
       this.$message.success("定制订阅已复制到剪贴板");

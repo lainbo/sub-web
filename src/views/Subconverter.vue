@@ -332,30 +332,17 @@ export default {
           value: 'https://suc.lainbo.com/sub?'
         },
         {
-          label: 'wcc',
-          value: 'https://api.wcc.best/sub?'
-        },
-        {
           label: '奶昔的后端',
           value: 'https://api.nexconvert.com/sub?'
         },
         {
-          label: 'sublink',
-          value: 'https://api.sublink.dev/sub?'
-        },
+          label: 'wcc',
+          value: 'https://api.wcc.best/sub?'
+        },  
       ],
-      regexpList: {
-        Nexitally: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire|premium)',
-        Kuromis: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire)',
-        FlowerCloud: '(?i)(traffic|(?=.*\\|)(?=.*gb).*|expire)',
-        Fengchao: '(?i)(网址|traffic|github)',
-        PaopaoDog: '(流量|套餐)',
-      },
-
       loading: false,
       customSubUrl: "",
       curtomShortSubUrl: "",
-
       dialogUploadConfigVisible: false,
       loadConfig: "",
       dialogLoadConfigVisible: false,
@@ -656,23 +643,6 @@ export default {
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
       this.form.customBackend = matchedBackend?.value || 'https://suc.lainbo.com/sub?';
     }
-
-    // 'form.filename'(newVal) {
-    //   const m = new Map([
-    //     ['奶昔', this.regexpList.Nexitally],
-    //     ['nexitally', this.regexpList.Nexitally],
-    //     ['kuromis', this.regexpList.Kuromis],
-    //     ['库洛米', this.regexpList.Kuromis],
-    //     ['花云', this.regexpList.FlowerCloud],
-    //     ['flowercloud', this.regexpList.FlowerCloud],
-    //     ['蜂巢', this.regexpList.Fengchao],
-    //     ['泡泡狗', this.regexpList.PaopaoDog],
-    //     ['泡泡dog', this.regexpList.PaopaoDog]
-    //   ])
-    //   if (m.has(newVal.toLowerCase())) {
-    //     this.form.excludeRemarks = m.get(newVal.toLowerCase())
-    //   }
-    // }
   }
 };
 </script>

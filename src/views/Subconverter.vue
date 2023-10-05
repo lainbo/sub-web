@@ -187,7 +187,11 @@ const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
 const tgBotLink = process.env.VUE_APP_BOT_LINK
-
+const backendLink = {
+  lainbo: 'https://suc.lainbo.com/sub?',
+  wcc: 'https://api.wcc.best/sub?',
+  nx: 'https://api.nexconvert.com/sub?',
+}
 export default {
   data() {
     return {
@@ -299,7 +303,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: "https://suc.lainbo.com/sub?",
+        customBackend: backendLink.lainbo,
         remoteConfig: "https://u.lainbo.com/config",
         excludeRemarks: "",
         includeRemarks: "",
@@ -329,15 +333,15 @@ export default {
       backendUrlOptions: [
         {
           label: 'Lainbo的后端',
-          value: 'https://suc.lainbo.com/sub?'
+          value: backendLink.lainbo
         },
         {
           label: '奶昔的后端',
-          value: 'https://api.nexconvert.com/sub?'
+          value: backendLink.nx
         },
         {
           label: 'wcc',
-          value: 'https://api.wcc.best/sub?'
+          value: backendLink.wcc
         },  
       ],
       loading: false,
@@ -634,14 +638,14 @@ export default {
   watch: {
     'form.sourceSubUrl'(newVal) {
       const customBackendMap = [
-        { key: 'oxycontin.cc', value: 'https://api.wcc.best/sub?' },
-        { key: '-YTOO-', value: 'https://api.wcc.best/sub?' },
-        { key: 'ljcmlu.lol', value: 'https://api.nexconvert.com/sub?' },
-        { key: '-NX-', value: 'https://api.nexconvert.com/sub?' },
+        { key: 'oxycontin.cc', value: backendLink.wcc },
+        { key: 'url-ytoo', value: backendLink.wcc },
+        { key: 'ljcmlu.lol', value: backendLink.nx },
+        { key: 'url-nx', value: backendLink.nx },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend?.value || 'https://suc.lainbo.com/sub?';
+      this.form.customBackend = matchedBackend?.value || backendLink.lainbo;
     }
   }
 };

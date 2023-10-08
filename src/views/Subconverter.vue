@@ -5,7 +5,6 @@
         <el-card>
           <div slot="header">
             Lainbo Subscription Converter
-
           </div>
           <el-container>
             <el-form :model="form" label-width="95px" style="width: 100%">
@@ -226,11 +225,6 @@ export default {
                 label: "Lainbo's config(短链)",
                 value:
                   "https://u.lainbo.com/config"
-              },
-              {
-                label: "Lainbo's config(短链备用)",
-                value:
-                  "https://v.gd/config"
               },
               {
                 label: "Lainbo's config(原链接，比较长但一定能连通)",
@@ -640,8 +634,6 @@ export default {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.wcc },
         { key: '-ytoo', value: backendLink.wcc },
-        { key: 'ljcmlu.lol', value: backendLink.nx },
-        { key: '-nx', value: backendLink.nx },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));

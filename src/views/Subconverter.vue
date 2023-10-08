@@ -303,7 +303,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: backendLink.lainbo,
+        customBackend: backendLink.nx,
         remoteConfig: "https://u.lainbo.com/config",
         excludeRemarks: "",
         includeRemarks: "",
@@ -645,7 +645,7 @@ export default {
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend?.value || backendLink.lainbo;
+      this.form.customBackend = matchedBackend?.value || backendLink.nx;
     }
   }
 };

@@ -639,9 +639,9 @@ export default {
     'form.sourceSubUrl'(newVal) {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.wcc },
-        { key: 'url-ytoo', value: backendLink.wcc },
+        { key: '-ytoo', value: backendLink.wcc },
         { key: 'ljcmlu.lol', value: backendLink.nx },
-        { key: 'url-nx', value: backendLink.nx },
+        { key: '-nx', value: backendLink.nx },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));

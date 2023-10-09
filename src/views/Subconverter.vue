@@ -297,7 +297,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: backendLink.nx,
+        customBackend: backendLink.lainbo,
         remoteConfig: "https://u.lainbo.com/config",
         excludeRemarks: "",
         includeRemarks: "",
@@ -634,10 +634,12 @@ export default {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.wcc },
         { key: '-ytoo', value: backendLink.wcc },
+        { key: '-nx', value: backendLink.nx },
+        { key: 'ljcmlu.lol', value: backendLink.nx },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend?.value || backendLink.nx;
+      this.form.customBackend = matchedBackend?.value || backendLink.lainbo;
     }
   }
 };

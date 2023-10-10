@@ -191,6 +191,7 @@ const backendLink = {
   wcc: 'https://api.wcc.best/sub?',
   nx: 'https://api.nexconvert.com/sub?',
 }
+const originBackend = backendLink.lainbo
 export default {
   data() {
     return {
@@ -297,7 +298,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: backendLink.lainbo,
+        customBackend: originBackend,
         remoteConfig: "https://u.lainbo.com/config",
         excludeRemarks: "",
         includeRemarks: "",
@@ -639,7 +640,7 @@ export default {
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend?.value || backendLink.lainbo;
+      this.form.customBackend = matchedBackend?.value || originBackend;
     }
   }
 };

@@ -299,7 +299,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: originBackend,
-        remoteConfig: "https://u.lainbo.com/config",
+        remoteConfig: "https://u.lainbo.com/clash-config",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

@@ -225,13 +225,12 @@ export default {
             options: [
               {
                 label: "Lainbo's config(短链)",
-                value:
-                  "https://u.lainbo.com/config"
+                value: "https://u.lainbo.com/clash-config"
               },
               {
-                label: "Lainbo's config(原链接，比较长但一定能连通)",
+                label: "Lainbo's config(原链接)",
                 value:
-                  "https://ghproxy.com/https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
+                  "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
               },
               {
                 label: "Ytoo",

@@ -432,7 +432,7 @@ export default {
           config: this.form.remoteConfig ? encodeURIComponent(this.form.remoteConfig) : null,
           exclude: this.form.excludeRemarks ? encodeURIComponent(this.form.excludeRemarks) : null,
           include: this.form.includeRemarks ? encodeURIComponent(this.form.includeRemarks) : null,
-          filename: this.form.filename || null,
+          filename: this.form.filename ? encodeURIComponent(this.form.filename) : null,
           append_type: this.form.appendType ? this.form.appendType.toString() : null,
           list: this.form.nodeList,
           tfo: this.form.tfo,

@@ -188,6 +188,7 @@ const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainbo: 'https://suc.lainbo.com/sub?',
+  lainboBackup: 'https://api.lainbo.com/sub?',
   wcc: 'https://api.wcc.best/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   amy: 'https://amyconvert.com/sub?',
@@ -329,6 +330,10 @@ export default {
         {
           label: 'Lainbo的后端',
           value: backendLink.lainbo
+        },
+        {
+          label: 'Lainbo的备用后端',
+          value: backendLink.lainboBackup
         },
         {
           label: '奶昔的后端',

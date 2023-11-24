@@ -189,7 +189,7 @@ const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainbo: 'https://suc.lainbo.com/sub?',
   lainboBackup: 'https://api.lainbo.com/sub?',
-  wcc: 'https://api.wcc.best/sub?',
+  sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   amy: 'https://amyconvert.com/sub?',
 }
@@ -344,8 +344,8 @@ export default {
           value: backendLink.amy
         },
         {
-          label: 'wcc',
-          value: backendLink.wcc
+          label: 'sublink',
+          value: backendLink.sublink
         },  
       ],
       loading: false,
@@ -642,8 +642,8 @@ export default {
   watch: {
     'form.sourceSubUrl'(newVal) {
       const customBackendMap = [
-        { key: 'oxycontin.cc', value: backendLink.wcc },
-        { key: '-ytoo', value: backendLink.wcc },
+        { key: 'oxycontin.cc', value: backendLink.sublink },
+        { key: '-ytoo', value: backendLink.sublink },
         { key: '-nx', value: backendLink.nx },
         { key: 'ljcmlu.lol', value: backendLink.nx },
       ];

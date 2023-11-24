@@ -191,7 +191,7 @@ const backendLink = {
   lainboBackup: 'https://api.lainbo.com/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
-  amy: 'https://amyconvert.com/sub?',
+  imm: 'https://immconvert.com/sub?',
 }
 const originBackend = backendLink.lainbo
 export default {
@@ -340,8 +340,8 @@ export default {
           value: backendLink.nx
         },
         {
-          label: 'Amy的后端',
-          value: backendLink.amy
+          label: 'imm的后端',
+          value: backendLink.imm
         },
         {
           label: 'sublink',
@@ -644,8 +644,10 @@ export default {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.sublink },
         { key: '-ytoo', value: backendLink.sublink },
-        { key: '-nx', value: backendLink.nx },
         { key: 'ljcmlu.lol', value: backendLink.nx },
+        { key: '-nx', value: backendLink.nx },
+        { key: 'vlrzgf.sbs', value: backendLink.imm },
+        { key: '-imm', value: backendLink.imm },
       ];
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));

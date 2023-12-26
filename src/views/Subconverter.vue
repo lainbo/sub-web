@@ -1,144 +1,142 @@
 <template>
   <div>
-    <el-row style="margin-top: 10px">
-      <el-col>
-        <el-card>
-          <div slot="header">
-            Lainbo Subscription Converter
-          </div>
-          <el-container>
-            <el-form :model="form" label-width="95px" style="width: 100%">
-              <el-form-item label="模式设置:">
-                <el-radio v-model="advanced" label="1">基础模式</el-radio>
-                <el-radio v-model="advanced" label="2">进阶模式</el-radio>
-              </el-form-item>
-              <el-form-item label="订阅链接:">
-                <el-input v-model.trim="form.sourceSubUrl" type="textarea" rows="3"
-                  placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
-              </el-form-item>
-              <el-form-item label="客户端:">
-                <el-select v-model="form.clientType" style="width: 100%">
-                  <el-option v-for="(v, k) in options.clientTypes" :key="k" :label="k" :value="v"></el-option>
+    <div class="wrapper">
+      <el-card class="form_card container">
+        <div slot="header">
+          Lainbo Subscription Converter
+        </div>
+        <el-container>
+          <el-form :model="form" label-width="88px" style="width: 100%">
+            <!-- <el-form-item label="模式设置:">
+              <el-radio v-model="advanced" label="1">基础模式</el-radio>
+              <el-radio v-model="advanced" label="2">进阶模式</el-radio>
+            </el-form-item> -->
+            <el-form-item label="订阅链接:">
+              <el-input v-model.trim="form.sourceSubUrl" type="textarea" rows="3"
+                placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
+            </el-form-item>
+            <el-form-item label="客户端:">
+              <el-select v-model="form.clientType" style="width: 100%">
+                <el-option v-for="(v, k) in options.clientTypes" :key="k" :label="k" :value="v"></el-option>
+              </el-select>
+            </el-form-item>
+
+            <div v-if="advanced === '2'">
+              <el-form-item label="后端地址:">
+                <el-select style="width: 100%" v-model="form.customBackend" filterable allow-create default-first-option
+                  placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?">
+                  <el-option v-for="item in backendUrlOptions" :key="item.value" :label="item.label"
+                    :value="item.value">
+                  </el-option>
                 </el-select>
               </el-form-item>
-
-              <div v-if="advanced === '2'">
-                <el-form-item label="后端地址:">
-                  <el-select style="width: 100%" v-model="form.customBackend" filterable allow-create default-first-option
-                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?">
-                    <el-option v-for="item in backendUrlOptions" :key="item.value" :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="远程配置:">
-                  <el-select v-model="form.remoteConfig" allow-create filterable placeholder="请选择" style="width: 100%">
-                    <el-option-group v-for="group in options.remoteConfig" :key="group.label" :label="group.label">
-                      <el-option v-for="item in group.options" :key="item.value" :label="item.label"
-                        :value="item.value"></el-option>
-                    </el-option-group>
-                    <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="订阅文件名:">
-                  <el-input v-model.trim="form.filename" placeholder="返回的订阅文件名" />
-                </el-form-item>
-                <el-form-item label="包含节点:">
-                  <el-input v-model.trim="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
-                </el-form-item>
-                <el-form-item label="排除节点:">
-                  <el-input v-model.trim="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
-                </el-form-item>
-                <el-form-item label-width="0px">
-                  <el-row type="flex">
-                    <el-col>
-                      <el-checkbox v-model="form.nodeList" label="输出为 Node List" border></el-checkbox>
-                    </el-col>
-                    <el-popover placement="bottom" v-model="form.extraset">
-                      <el-row>
-                        <div>Emoji:</div>
-                        <el-radio-group v-model="form.emoji" size="mini" label="Emoji">
-                          <el-radio-button :label="undefined">订阅自带</el-radio-button>
-                          <el-radio-button :label="true">规则内置</el-radio-button>
-                          <el-radio-button :label="false">关闭</el-radio-button>
-                        </el-radio-group>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.scv" label="跳过证书验证"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.udp" @change="needUdp = true" label="启用 UDP"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.appendType" label="节点类型"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.sort" label="排序节点"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.fdn" label="过滤非法节点"></el-checkbox>
-                      </el-row>
-                      <el-button slot="reference">更多选项</el-button>
-                    </el-popover>
-                    <el-popover placement="bottom" style="margin-left: 10px">
-                      <el-row>
-                        <el-checkbox v-model="form.tpl.surge.doh" label="Surge.DoH"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.tpl.clash.doh" label="Clash.DoH"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.insert" label="网易云"></el-checkbox>
-                      </el-row>
-                      <el-button slot="reference">定制功能</el-button>
-                    </el-popover>
+              <el-form-item label="远程配置:">
+                <el-select v-model="form.remoteConfig" allow-create filterable placeholder="请选择" style="width: 100%">
+                  <el-option-group v-for="group in options.remoteConfig" :key="group.label" :label="group.label">
+                    <el-option v-for="item in group.options" :key="item.value" :label="item.label"
+                      :value="item.value"></el-option>
+                  </el-option-group>
+                  <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="订阅文件名:">
+                <el-input v-model.trim="form.filename" placeholder="返回的订阅文件名" />
+              </el-form-item>
+              <el-form-item label="包含节点:">
+                <el-input v-model.trim="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
+              </el-form-item>
+              <el-form-item label="排除节点:">
+                <el-input v-model.trim="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
+              </el-form-item>
+              <el-form-item label=" ">
+                <el-popover placement="bottom" v-model="form.extraset">
+                  <el-row>
+                    <div>Emoji:</div>
+                    <el-radio-group v-model="form.emoji" size="mini" label="Emoji">
+                      <el-radio-button :label="undefined">订阅自带</el-radio-button>
+                      <el-radio-button :label="true">规则内置</el-radio-button>
+                      <el-radio-button :label="false">关闭</el-radio-button>
+                    </el-radio-group>
                   </el-row>
-                </el-form-item>
+                  <el-row style="margin-top: 8px;">
+                    <el-checkbox v-model="form.scv" label="跳过证书验证"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.nodeList" label="输出为 Node List"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.udp" @change="needUdp = true" label="启用 UDP"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.appendType" label="节点类型"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.sort" label="排序节点"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.fdn" label="过滤非法节点"></el-checkbox>
+                  </el-row>
+                  <el-button slot="reference">更多选项</el-button>
+                </el-popover>
+                <!-- <el-popover placement="bottom" style="margin-left: 10px">
+                  <el-row>
+                    <el-checkbox v-model="form.tpl.surge.doh" label="Surge.DoH"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.tpl.clash.doh" label="Clash.DoH"></el-checkbox>
+                  </el-row>
+                  <el-row>
+                    <el-checkbox v-model="form.insert" label="网易云"></el-checkbox>
+                  </el-row>
+                  <el-button slot="reference">定制功能</el-button>
+                </el-popover> -->
+              </el-form-item>
+            </div>
+
+
+            <el-divider content-position="center">
+              <i class="el-icon-magic-stick"></i>
+            </el-divider>
+
+            <el-form-item label="新的订阅:">
+              <el-input class="copy-content" disabled v-model="customSubUrl">
+                <el-button slot="append" v-clipboard:copy="customSubUrl" v-clipboard:success="onCopy" ref="copy-btn"
+                  icon="el-icon-document-copy">复制</el-button>
+              </el-input>
+            </el-form-item>
+            <!-- <el-form-item label="订阅短链:">
+              <el-input class="copy-content" disabled v-model="curtomShortSubUrl">
+                <el-button slot="append" v-clipboard:copy="curtomShortSubUrl" v-clipboard:success="onCopy"
+                  ref="copy-btn" icon="el-icon-document-copy">复制</el-button>
+              </el-input>
+            </el-form-item> -->
+
+            <!-- <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
+              
+              <el-button style="width: 120px" type="danger" 
+                :disabled="true">生成短链接</el-button>
+              <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button>
+            </el-form-item> -->
+
+            <!-- <el-form-item label-width="0px" style="text-align: center">
+              <el-button style="width: 120px" type="primary" @click="dialogUploadConfigVisible = true"
+                icon="el-icon-upload" :loading="loading">上传配置</el-button>
+              <el-button style="width: 250px" type="primary" @click="clashInstall" icon="el-icon-connection"
+                :disabled="customSubUrl.length === 0">一键导入Clash</el-button>
+            </el-form-item> -->
+            <el-form-item label=" ">
+              <div class="end_form">
+                <el-button style="width: 250px" @click="dialogLoadConfigVisible = true"
+                   :loading="loading">从URL解析</el-button>
+                <el-button style="width: 250px" type="primary" @click="makeUrl"
+                :disabled="form.sourceSubUrl.length === 0">生成订阅链接</el-button>
               </div>
-
-              <div style="margin-top: 50px"></div>
-
-              <el-divider content-position="center">
-                <i class="el-icon-magic-stick"></i>
-              </el-divider>
-
-              <el-form-item label="定制订阅:">
-                <el-input class="copy-content" disabled v-model="customSubUrl">
-                  <el-button slot="append" v-clipboard:copy="customSubUrl" v-clipboard:success="onCopy" ref="copy-btn"
-                    icon="el-icon-document-copy">复制</el-button>
-                </el-input>
-              </el-form-item>
-              <el-form-item label="订阅短链:">
-                <el-input class="copy-content" disabled v-model="curtomShortSubUrl">
-                  <el-button slot="append" v-clipboard:copy="curtomShortSubUrl" v-clipboard:success="onCopy"
-                    ref="copy-btn" icon="el-icon-document-copy">复制</el-button>
-                </el-input>
-              </el-form-item>
-
-              <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
-                <el-button style="width: 120px" type="danger" @click="makeUrl"
-                  :disabled="form.sourceSubUrl.length === 0">生成订阅链接</el-button>
-                <el-button style="width: 120px" type="danger" 
-                  :disabled="true">生成短链接</el-button>
-                <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button> -->
-              </el-form-item>
-
-              <el-form-item label-width="0px" style="text-align: center">
-                <el-button style="width: 120px" type="primary" @click="dialogUploadConfigVisible = true"
-                  icon="el-icon-upload" :loading="loading">上传配置</el-button>
-                <el-button style="width: 120px" type="primary" @click="clashInstall" icon="el-icon-connection"
-                  :disabled="customSubUrl.length === 0">一键导入Clash</el-button>
-              </el-form-item>
-              <el-form-item label-width="0px" style="text-align: center">
-                <el-button style="width: 250px" type="primary" @click="dialogLoadConfigVisible = true"
-                  icon="el-icon-copy-document" :loading="loading">从URL解析</el-button>
-              </el-form-item>
-            </el-form>
-          </el-container>
-        </el-card>
-      </el-col>
-    </el-row>
-
+            </el-form-item>
+          </el-form>
+        </el-container>
+      </el-card>
+    </div>
+    
     <el-dialog :visible.sync="dialogUploadConfigVisible" :show-close="false" :close-on-click-modal="false"
       :close-on-press-escape="false" width="700px">
       <div slot="title">
@@ -188,7 +186,6 @@ const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainbo: 'https://suc.lainbo.com/sub?',
-  lainboBackup: 'https://api.lainbo.com/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   imm: 'https://immconvert.com/sub?',
@@ -225,28 +222,12 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config(短链)",
+                label: "Lainbo's config",
                 value: "https://u.lainbo.com/clash-config"
               },
               {
-                label: "Lainbo's config(原链接)",
-                value:
-                  "https://raw.githubusercontent.com/lainbo/gists-hub/master/src/Clash/RemoteConfig/Lainbo.ini"
-              },
-              {
-                label: "Ytoo",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/ytoo.ini"
-              },
-              {
-                label: "FlowerCloud",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/flowercloud.ini"
-              },
-              {
-                label: "Nexitally",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/customized/nexitally.ini"
+                label: "Lainbo's config仅解决DNS泄露",
+                value: "https://u.lainbo.com/clash-config-mini"
               },
             ]
           },
@@ -264,36 +245,6 @@ export default {
               }
             ]
           },
-          {
-            label: "universal",
-            options: [
-              {
-                label: "No-Urltest",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/no-urltest.ini"
-              },
-              {
-                label: "Urltest",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/urltest.ini"
-              }
-            ]
-          },
-          {
-            label: "Special",
-            options: [
-              {
-                label: "NeteaseUnblock(仅规则，No-Urltest)",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/netease.ini"
-              },
-              {
-                label: "Basic(仅GEOIP CN + Final)",
-                value:
-                  "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/basic.ini"
-              }
-            ]
-          }
         ]
       },
       form: {
@@ -330,10 +281,6 @@ export default {
         {
           label: 'Lainbo的后端',
           value: backendLink.lainbo
-        },
-        {
-          label: 'Lainbo的备用后端',
-          value: backendLink.lainboBackup
         },
         {
           label: '奶昔的后端',
@@ -376,7 +323,7 @@ export default {
   },
   methods: {
     onCopy() {
-      this.$message.success("Copied!");
+      this.$message.success("已复制");
     },
     goToProject() {
       window.open(project);
@@ -656,3 +603,19 @@ export default {
   }
 };
 </script>
+<style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10vh;
+}
+.form_card {
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+.end_form {
+  display: flex;
+  justify-content: end;
+}
+</style>

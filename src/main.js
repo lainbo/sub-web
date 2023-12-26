@@ -9,6 +9,7 @@ require(`@/plugins/axios`)
 require(`@/plugins/device`)
 
 import './registerServiceWorker'
+import '@/assets/css/global.scss'
 
 Vue.config.productionTip = false
 

@@ -235,12 +235,12 @@ export default {
             label: "ACL4SSR",
             options: [
               {
-                label: "ACL4SSR_Online_Mini 精简（与GitHub同步）",
+                label: "ACL4SSR_Online_Mini",
                 value:
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
               },
               {
-                label: "ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)",
+                label: "ACL4SSR_Online_Mini_AdblockPlus",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
               }
             ]

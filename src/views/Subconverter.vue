@@ -99,7 +99,7 @@
             </el-divider>
 
             <el-form-item label="新的订阅:">
-              <el-input class="copy-content" disabled v-model="customSubUrl">
+              <el-input class="copy-content" readonly v-model="customSubUrl">
                 <el-button slot="append" v-clipboard:copy="customSubUrl" v-clipboard:success="onCopy" ref="copy-btn"
                   icon="el-icon-document-copy">复制</el-button>
               </el-input>
@@ -607,8 +607,14 @@ export default {
 .wrapper {
   display: flex;
   justify-content: center;
+  position: absolute;
+  inset: 0;
+  top: -8vh;
+  top: calc(var(--1dvh, 1vh) * -8);
+  top: -8dvh;
+  margin: auto;
   width: 100%;
-  padding-top: 10vh;
+  height: fit-content;
 }
 .form_card {
   border-radius: 12px;

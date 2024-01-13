@@ -224,11 +224,11 @@ export default {
             options: [
               {
                 label: "Lainbo's config",
-                value: "https://u.lainbo.com/clash-config"
+                value: "https://ours.day/clash-config"
               },
               {
                 label: "Lainbo's config仅解决DNS泄露",
-                value: "https://u.lainbo.com/clash-config-mini"
+                value: "https://ours.day/clash-config-mini"
               },
             ]
           },
@@ -252,7 +252,7 @@ export default {
         sourceSubUrl: "",
         clientType: "",
         customBackend: originBackend,
-        remoteConfig: "https://u.lainbo.com/clash-config",
+        remoteConfig: "https://ours.day/clash-config",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",

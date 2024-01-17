@@ -186,7 +186,7 @@ const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainbo: 'https://suc.lainbo.com/sub?',
-  lainboBackup: 'https://api-sub.ours.day/sub?',
+  lainboBackup: 'https://api.ours.day/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   imm: 'https://immconvert.com/sub?',

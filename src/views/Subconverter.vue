@@ -283,10 +283,10 @@ export default {
           label: 'Lainbo的后端',
           value: backendLink.lainbo
         },
-        {
-          label: 'Lainbo的备用后端',
-          value: backendLink.lainboBackup
-        },
+        // {
+        //   label: 'Lainbo的备用后端',
+        //   value: backendLink.lainboBackup
+        // },
         {
           label: '奶昔的后端',
           value: backendLink.nx

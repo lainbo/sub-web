@@ -13,7 +13,7 @@
             </el-form-item> -->
             <el-form-item label="订阅链接:">
               <el-input v-model.trim="form.sourceSubUrl" type="textarea" rows="3"
-                placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
+                placeholder="支持订阅链接, 或ss/ssr/vmess/vless/hysteria链接, 多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
             </el-form-item>
             <el-form-item label="客户端:">
               <el-select v-model="form.clientType" style="width: 100%">
@@ -40,7 +40,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="订阅文件名:">
-                <el-input v-model.trim="form.filename" placeholder="返回的订阅文件名" />
+                <el-input v-model.trim="form.filename" placeholder="输入给你提供订阅的服务商名字(可选)" />
               </el-form-item>
               <el-form-item label="包含节点:">
                 <el-input v-model.trim="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
@@ -185,14 +185,13 @@ const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
-  lainbo: 'https://suc.lainbo.com/sub?',
   lainboEnhance: 'https://api-sub.ours.day/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   amy: 'https://amyconvert.com/sub?',
   imm: 'https://immconvert.com/sub?',
 }
-const originBackend = backendLink.lainbo
+const originBackend = backendLink.lainboEnhance
 export default {
   data() {
     return {
@@ -282,10 +281,6 @@ export default {
       backendUrlOptions: [
         {
           label: 'Lainbo的后端',
-          value: backendLink.lainbo
-        },
-        {
-          label: 'Lainbo的实验性后端',
           value: backendLink.lainboEnhance
         },
         {
@@ -419,7 +414,7 @@ export default {
 
 
       this.$copyText(this.customSubUrl);
-      this.$message.success("定制订阅已复制到剪贴板");
+      this.$message.success("新的订阅链接已复制到剪贴板");
     },
     notify() {
       const h = this.$createElement;

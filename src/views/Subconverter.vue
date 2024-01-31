@@ -189,6 +189,7 @@ const backendLink = {
   lainboEnhance: 'https://api-sub.ours.day/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
+  amy: 'https://amyconvert.com/sub?',
   imm: 'https://immconvert.com/sub?',
 }
 const originBackend = backendLink.lainbo
@@ -290,6 +291,10 @@ export default {
         {
           label: '奶昔的后端',
           value: backendLink.nx
+        },
+        {
+          label: 'Amy的后端',
+          value: backendLink.amy
         },
         {
           label: 'imm的后端',
@@ -596,8 +601,8 @@ export default {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.sublink },
         { key: '-ytoo', value: backendLink.sublink },
-        { key: 'ljcmlu.lol', value: backendLink.nx },
-        { key: '-nx', value: backendLink.nx },
+        { key: 'ljcmlu.lol', value: backendLink.amy },
+        { key: '-nx', value: backendLink.amy },
         { key: 'vlrzgf.sbs', value: backendLink.imm },
         { key: '-imm', value: backendLink.imm },
       ];

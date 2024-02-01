@@ -3,7 +3,7 @@
     <div class="wrapper">
       <el-card class="form_card container">
         <div slot="header">
-          Lainbo Subscription Converter
+          Lainbo's subconverter
         </div>
         <el-container>
           <el-form :model="form" label-width="88px" style="width: 100%">

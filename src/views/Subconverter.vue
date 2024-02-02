@@ -6,7 +6,7 @@
           Lainbo's subconverter
         </div>
         <el-container>
-          <el-form :model="form" label-width="88px" style="width: 100%">
+          <el-form size="medium" :model="form" label-width="88px" style="width: 100%">
             <!-- <el-form-item label="模式设置:">
               <el-radio v-model="advanced" label="1">基础模式</el-radio>
               <el-radio v-model="advanced" label="2">进阶模式</el-radio>

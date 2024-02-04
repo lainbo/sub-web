@@ -186,6 +186,8 @@ const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainboEnhance: 'https://api-sub.ours.day/sub?',
+  lainboExperimental: 'https://suc.lainbo.com/sub?',
+  feiyang: 'https://api.v1.mk/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   amy: 'https://amyconvert.com/sub?',
@@ -282,6 +284,14 @@ export default {
         {
           label: 'Lainbo的后端',
           value: backendLink.lainboEnhance
+        },
+        {
+          label: 'Lainbo的实验性后端',
+          value: backendLink.lainboExperimental
+        },
+        {
+          label: '肥羊增强型后端',
+          value: backendLink.feiyang
         },
         {
           label: '奶昔的后端',

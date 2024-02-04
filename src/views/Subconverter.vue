@@ -17,7 +17,14 @@
             </el-form-item>
             <el-form-item label="客户端:">
               <el-select v-model="form.clientType" style="width: 100%">
-                <el-option v-for="(v, k) in options.clientTypes" :key="k" :label="k" :value="v"></el-option>
+                <el-option
+                 v-for="(v, k) in options.clientTypes"
+                 :key="k"
+                 :label="k"
+                 :value="v"
+                 :disabled="![backendLink.lainboExperimental, backendLink.feiyang].includes(form.customBackend) && v==='singbox'"
+                >
+                </el-option>
               </el-select>
             </el-form-item>
 
@@ -197,6 +204,7 @@ const originBackend = backendLink.lainboEnhance
 export default {
   data() {
     return {
+      backendLink,
       advanced: "2",
 
       // 是否为 PC 端
@@ -207,6 +215,7 @@ export default {
           Clash: "clash",
           Surge3: "surge&ver=3",
           Surge4: "surge&ver=4",
+          "Sing-Box(仅Lainbo实验性、肥羊后端支持)": "singbox",
           Quantumult: "quan",
           QuantumultX: "quanx",
           Surfboard: "surfboard",
@@ -614,6 +623,18 @@ export default {
 
       const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
       this.form.customBackend = matchedBackend?.value || originBackend;
+    },
+    'form.customBackend'() {
+      if (!this.isSingboxBackend && this.form.clientType === 'singbox') {
+        this.$message.error("当前后端不支持Singbox客户端，已自动切换转换目标为Clash");
+        this.form.clientType = 'clash';
+      }
+    }
+  },
+  computed: {
+    // 当前是支持singbox的后端
+    isSingboxBackend() {
+      return [backendLink.lainboExperimental, backendLink.feiyang].includes(this.form.customBackend);
     }
   }
 };

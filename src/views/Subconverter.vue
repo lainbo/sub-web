@@ -12,7 +12,7 @@
               <el-radio v-model="advanced" label="2">进阶模式</el-radio>
             </el-form-item> -->
             <el-form-item label="订阅链接:">
-              <el-input v-model.trim="form.sourceSubUrl" type="textarea" rows="3"
+              <el-input v-model="form.sourceSubUrl" type="textarea" rows="3"
                 placeholder="支持订阅链接, 或ss/ssr/vmess/vless/hysteria链接, 多个链接每行一个或用 | 分隔" @blur="saveSubUrl" />
             </el-form-item>
             <el-form-item label="客户端:">
@@ -391,8 +391,13 @@ export default {
           ? defaultBackend
           : this.form.customBackend;
 
-      let sourceSub = this.form.sourceSubUrl;
-      sourceSub = sourceSub.replace(/(\n|\r|\n\r)/g, "|");
+      let sourceSub = this.form.sourceSubUrl
+      const parts = sourceSub.split(/\r\n|\n|\r/)
+        .map(line =>
+          line.split('|').map(part => part.trim()).filter(part => part !== '').join('|'),
+        )
+        .filter(part => part !== '') // 过滤掉空行
+      sourceSub = parts.join('|')
 
       this.customSubUrl =
         backend +

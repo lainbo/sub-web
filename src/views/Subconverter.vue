@@ -43,7 +43,6 @@
                     <el-option v-for="item in group.options" :key="item.value" :label="item.label"
                       :value="item.value"></el-option>
                   </el-option-group>
-                  <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
                 </el-select>
               </el-form-item>
               <el-form-item label="订阅文件名:">
@@ -234,12 +233,16 @@ export default {
             label: "customized",
             options: [
               {
-                label: "Lainbo's config",
+                label: "Lainbo's config 默认配置",
                 value: "https://u.lainbo.com/clash-config"
               },
               {
-                label: "Lainbo's config仅解决DNS泄露",
+                label: "Lainbo's config 仅解决DNS泄露",
                 value: "https://u.lainbo.com/clash-config-mini"
+              },
+              {
+                label: "Lainbo's config 黑名单模式",
+                value: "https://u.lainbo.com/clash-config-blocklist"
               },
             ]
           },

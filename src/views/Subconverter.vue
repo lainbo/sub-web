@@ -193,7 +193,7 @@ const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainboEnhance: 'https://api-sub.ours.day/sub?',
   lainboExperimental: 'https://suc.lainbo.com/sub?',
-  feiyang: 'https://api.v1.mk/sub?',
+  feiyang: 'https://url.v1.mk/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
   amy: 'https://amyconvert.com/sub?',

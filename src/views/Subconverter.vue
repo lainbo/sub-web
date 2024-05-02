@@ -623,8 +623,8 @@ export default {
       const customBackendMap = [
         { key: 'oxycontin.cc', value: backendLink.sublink },
         { key: '-ytoo', value: backendLink.sublink },
-        { key: 'ljcmlu.lol', value: backendLink.amy },
-        { key: '-nx', value: backendLink.amy },
+        { key: 'ljcmlu.lol', value: backendLink.nx },
+        { key: '-nx', value: backendLink.nx },
         { key: 'vlrzgf.sbs', value: backendLink.imm },
         { key: '-imm', value: backendLink.imm },
       ];

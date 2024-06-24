@@ -619,19 +619,18 @@ export default {
     }
   },
   watch: {
-    'form.sourceSubUrl'(newVal) {
-      const customBackendMap = [
-        { key: 'oxycontin.cc', value: backendLink.sublink },
-        { key: '-ytoo', value: backendLink.sublink },
-        { key: 'ljcmlu.lol', value: backendLink.nx },
-        { key: '-nx', value: backendLink.nx },
-        { key: 'vlrzgf.sbs', value: backendLink.imm },
-        { key: '-imm', value: backendLink.imm },
-      ];
-
-      const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
-      this.form.customBackend = matchedBackend?.value || originBackend;
-    },
+    // 'form.sourceSubUrl'(newVal) {
+    //   const customBackendMap = [
+    //     { key: 'oxycontin.cc', value: backendLink.sublink },
+    //     { key: '-ytoo', value: backendLink.sublink },
+    //     { key: 'ljcmlu.lol', value: backendLink.nx },
+    //     { key: '-nx', value: backendLink.nx },
+    //     { key: 'vlrzgf.sbs', value: backendLink.imm },
+    //     { key: '-imm', value: backendLink.imm },
+    //   ];
+    //   const matchedBackend = customBackendMap.find(entry => newVal.includes(entry.key));
+    //   this.form.customBackend = matchedBackend?.value || originBackend;
+    // },
     'form.customBackend'() {
       if (!this.isSingboxBackend && this.form.clientType === 'singbox') {
         this.$message.error("当前后端不支持Singbox客户端，已自动切换转换目标为Clash");

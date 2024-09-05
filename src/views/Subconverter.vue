@@ -318,7 +318,7 @@ export default {
           value: backendLink.imm
         },
         {
-          label: 'sublink(YTOO用这个)',
+          label: 'sublink',
           value: backendLink.sublink
         },  
       ],

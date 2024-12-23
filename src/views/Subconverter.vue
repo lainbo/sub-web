@@ -22,7 +22,7 @@
                  :key="k"
                  :label="k"
                  :value="v"
-                 :disabled="![backendLink.lainboExperimental, backendLink.feiyang].includes(form.customBackend) && v==='singbox'"
+                 :disabled="![backendLink.lainboEnhance, backendLink.feiyang].includes(form.customBackend) && v==='singbox'"
                 >
                 </el-option>
               </el-select>
@@ -192,7 +192,6 @@ const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 const backendLink = {
   lainboEnhance: 'https://api-sub.ours.day/sub?',
-  lainboExperimental: 'https://suc.lainbo.com/sub?',
   feiyang: 'https://url.v1.mk/sub?',
   sublink: 'https://api.sublink.dev/sub?',
   nx: 'https://api.nexconvert.com/sub?',
@@ -214,7 +213,7 @@ export default {
           Clash: "clash",
           Surge3: "surge&ver=3",
           Surge4: "surge&ver=4",
-          "Sing-Box(仅Lainbo实验性、肥羊后端支持)": "singbox",
+          "Sing-Box(仅Lainbo、肥羊后端支持)": "singbox",
           Quantumult: "quan",
           QuantumultX: "quanx",
           Surfboard: "surfboard",
@@ -235,6 +234,10 @@ export default {
               {
                 label: "Lainbo's config 默认配置",
                 value: "https://u.lainbo.com/clash-config"
+              },
+              {
+                label: "Lainbo's config 增强（若无欧洲节点，使用会导致网络异常）",
+                value: "https://u.lainbo.com/clash-config-tg"
               },
               {
                 label: "Lainbo's config 仅解决DNS泄露",
@@ -296,10 +299,6 @@ export default {
         {
           label: 'Lainbo的后端',
           value: backendLink.lainboEnhance
-        },
-        {
-          label: 'Lainbo的实验性后端',
-          value: backendLink.lainboExperimental
         },
         {
           label: '肥羊增强型后端',
@@ -641,7 +640,7 @@ export default {
   computed: {
     // 当前是支持singbox的后端
     isSingboxBackend() {
-      return [backendLink.lainboExperimental, backendLink.feiyang].includes(this.form.customBackend);
+      return [backendLink.lainboEnhance, backendLink.feiyang].includes(this.form.customBackend);
     }
   }
 };
